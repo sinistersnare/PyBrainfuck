@@ -22,7 +22,7 @@ Right now it has two options:
 
 TODO:
 
-*have REPL remember its history
+*have REPL remember its history 
 
 *give REPL a '_' feature, like the Python REPL
 
