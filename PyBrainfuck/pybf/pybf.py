@@ -3,7 +3,6 @@
 """
 brainfuck interpreter written in python
 @author: Davis-Sinistersnare
-
 """
 
 #################################################### 
@@ -12,7 +11,6 @@ TODO:
 -have REPL remember its history DONE
 -give REPL a '_' feature, like the Python REPL
 -CLASSIFY DONE (mostly)
-
 """
 ####################################################
 
@@ -50,7 +48,7 @@ class BFE:
                 popd = lbmap.pop()
                 bmap[popd] = pos
                 bmap[pos] = popd
-        return
+        return bmap
     #end _makemap()
     
     def execute(self,repl=True,to_use=''):
@@ -125,7 +123,6 @@ class BFE:
                 
 #end class BFE
 
-
 def main(code="",repl=True,cmd=""):
     """
     starts the execution of code
@@ -143,8 +140,8 @@ def main(code="",repl=True,cmd=""):
         
     print
     
-
-
+    
+    
 if __name__ == '__main__': 
     parser = argparse.ArgumentParser()
     group = parser.add_mutually_exclusive_group()
@@ -152,17 +149,12 @@ if __name__ == '__main__':
     group.add_argument("-r","--repl",help="uses a repl. argument will be prompt empty uses default")
     
     args = parser.parse_args()
-
+    
     if args.file:
         main(code=open(args.file).read(),repl=False)
     elif args.repl:
         main(prompt=args.repl)
     else:
         main()
-    
-    
-    
-    
-    
     
     
