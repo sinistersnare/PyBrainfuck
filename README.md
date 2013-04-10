@@ -10,11 +10,11 @@ im planning on extending this implementation as much as it can be extended.
 
 Right now it has two options:
 
-*File: which lets you selec a file in the same directory. Try out `python pybf.py -f test.bf` and see how it works!
+* File: which lets you selec a file in the same directory. Try out `python pybf.py -f test.bf` and see how it works!
 
-*Repl: this has very basic functionality right now, where it doesnt save state. use `python pybf.py -r prompttext` for a prompt!
+* Repl: this has very basic functionality right now, where it doesnt save state. use `python pybf.py -r prompttext` for a prompt!
 
-*Repl is default, if you do not choose any commands, then the default prompt is `bf>`
+* Repl is default, if you do not choose any commands, then the default prompt is `bf>`
 
 
 
@@ -22,13 +22,8 @@ Right now it has two options:
 
 TODO:
 
-*have REPL remember its history 
-
-*give REPL a '_' feature, like the Python REPL
-
-*CLASSIFY (Object orient the file)
-
-*other stuff! 
+* other stuff! 
+* (ideas, anyone?) 
 
 
 --------------------------------------------------------------------------------------------------------------------------------
@@ -51,8 +46,8 @@ The name of the language is generally not capitalized except at the start of a s
 
 Links: 
 
-*[Esolang page on brainfuck](http://esolangs.org/wiki/Brainfuck)
+* [Esolang page on brainfuck](http://esolangs.org/wiki/Brainfuck)
 
-*[Wikipedia page on brainfuck](http://en.wikipedia.org/wiki/Brainfuck)
+* [Wikipedia page on brainfuck](http://en.wikipedia.org/wiki/Brainfuck)
 
-*[The brainfuck archive](http://esoteric.sange.fi/brainfuck/)
+* [The brainfuck archive](http://esoteric.sange.fi/brainfuck/)
