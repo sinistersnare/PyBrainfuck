@@ -9,7 +9,8 @@ brainfuck interpreter written in python
 ####################################################
 """
 TODO:
--There is a semantic error in the makemap method. does not catch the KeyboardError (or any error) if mismatching brackets appear
+-Catching an error when you increment a cell, then attempt to throw with unmatched braces...
+-The above is really pissing me off, but ill push anyways.
 -I HAVE NO IDEA!
 -IDEA! i could add unit tests! what a good idea! good job sinistersnare!
 -Its too late...time for bed!
@@ -20,6 +21,7 @@ TODO:
 
 import sys
 import argparse
+
 
 class BFE:
    """
@@ -42,18 +44,23 @@ class BFE:
       lbmap = []
       
       #THIS DOESNT WORK
-      try:
-         for pos, val in enumerate(self.code):
-        
-            if val == '[':
-               lbmap.append(pos)
-            if val == ']':
+      
+      
+      for pos, val in enumerate(self.code):
+         if val == '[':
+            lbmap.append(pos)
+            
+         if val == ']':
+            try:
+            
                popd = lbmap.pop()
                bmap[popd] = pos
                bmap[pos] = popd
-      except:
-         sys.stderr.write("Bracket Mismatch!")
-      
+            except IndexError as e:
+               #this works because the exception happens here, not at run time like the left bracket...
+               #not sure if this should be frowned upon, but im doing it anyways!
+               sys.stderr.write("BracketingError! \"]\" python IndexError")
+               print e.value
       return bmap
     #end _makemap()
     
@@ -102,11 +109,20 @@ class BFE:
                cells[pos] = 0
                     
          elif token == '[' and cells[pos] == 0:
-            codepos = bmap[codepos]
+            try:
+               codepos = bmap[codepos]
+            except KeyError:
+               sys.stderr.write("BracketingError! \"[\" python KeyError")
+               
             
          elif token == ']' and cells[pos] != 0:
-            codepos = bmap[codepos]
-            
+            try:
+               codepos = bmap[codepos]
+            except KeyError:
+               #pretty certain this will never happen!
+               sys.stderr.write("BracketingError! \"]\" python KeyError")
+               
+               
          elif token == '/':
             sys.stdout.write(str(cells[pos]))            
             
@@ -161,4 +177,3 @@ if __name__ == '__main__':
       main(prompt=args.repl)
    else:
       main()
-
