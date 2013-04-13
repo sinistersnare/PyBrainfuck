@@ -14,7 +14,7 @@ TODO:
 -The above is really pissing me off, but ill push anyways.
 -I HAVE NO IDEA!
 -IDEA! i could add unit tests! what a good idea! good job sinistersnare!
--Its too late...time for bed!
+-Its too late...time for bed! 
 """
 ####################################################
 
@@ -33,13 +33,13 @@ class BFE:
       """ initializes all of the fields for use in the class """
       self.mapping = {'+':self._add, '-':self._sub, '<':self._inc, '>':self._dec, ',':self._input, '.':self._out, '[':self._lbrace, ']':self._rbrace, '/':self._cellval}
       self.operators = ['+','-','<','>',',','.','[',']','/']
-      self.code = filter(lambda x: x in self.operators, code)
+      self.code = ""
       self.cells = [0]
       self.pos = 0
       self.codepos = 0
       self.prompt = "bf> "
       self.endof = ''
-      self.bmap = self.makemap()
+      self.bmap = {}
    def makemap(self):
       """ builds a map for the loop to run through """
       
@@ -59,10 +59,14 @@ class BFE:
                #this works because the exception happens here, not at run time like the left bracket...
                #not sure if this should be frowned upon, but im doing it anyways!
                sys.stderr.write("BracketingError! \"]\" python IndexError")
-               print e.value
+               
       return bmap
     #end _makemap()
-    
+   
+   def updatecode(self,newcode):
+      self.code = filter(lambda x: x in self.operators,newcode)
+   
+   
    def _add(self):
       """adds one to the current cell"""
       
@@ -161,13 +165,13 @@ class BFE:
          code = self.code
       else:
          code = to_use
-      
+      code = self.updatecode(code)
       codepos = self.codepos
       cells = self.cells
       pos = self.pos
-      bmap = self.bmap
+      bmap = self.makemap()
       funcs = self.mapping
-      
+      print code
       while codepos < len(code):
          token = code[codepos]
          
@@ -185,7 +189,7 @@ class BFE:
       the standard REPL for my bf interpreter, missing many key features (see TODO section)
       """
       while True:
-         self.code = raw_input(self.prompt)
+         updatecode(raw_input(self.prompt))
          self.execute()
    #end repl()
                 
@@ -202,7 +206,7 @@ def main(code="",repl=True,cmd=""):
          bfe.prompt = cmd
       bfe.repl()
    elif code:
-      bfe.code=code
+      bfe.updatecode(code)
       bfe.execute(repl=False)
         
         
